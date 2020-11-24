@@ -77,6 +77,14 @@
             }
         });
 
+        var perms = ['camera', 'storage', 'photos'];
+        var sType = api.systemType;
+        if (sType == "android") {
+            if (!confirmPer(perms)) {
+                return;
+            }
+        }
+
         api.setFrameClient({
             frameName: 'main'
         }, function (ret) {
@@ -95,15 +103,6 @@
             });
         });
         removeLogic();
-
-        var perms = ['location', 'phone', 'camera', 'storage', 'photos'];
-        var sType = api.systemType;
-        // confirmPer(perms);
-        if (sType == "android") {
-            if (!confirmPer(perms)) {
-                return;
-            }
-        }
     };
 
     function onBrowserStateChange(ret) {
