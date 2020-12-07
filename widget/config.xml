@@ -60,6 +60,8 @@
 
     <permission name="hardware"/>
 
+    <preference name="userAgent" value="/apicloud/i" />
+
     <feature name="aliPayPlus">
         <param name="urlScheme" value="AliPayPlusA6005577094467"/>
     </feature>
