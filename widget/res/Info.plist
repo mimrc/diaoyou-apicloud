@@ -5,9 +5,8 @@
     <!-- 相机 -->
     <key>NSCameraUsageDescription</key>
     <string>拍照上传图片需要访问您的相机</string>
+
     <key>NSPhotoLibraryUsageDescription</key>
     <string>上传头像图片需要访问您的相册</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <true/>
 </dict>
 </plist>
