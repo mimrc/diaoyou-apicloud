@@ -17,6 +17,9 @@
             -webkit-box-align: center;
             display: none;
         }
+        #footer {
+            height: 0;
+        }
     </style>
 </head>
 
@@ -27,6 +30,7 @@
         <div id="main" class='center'>
             <img id='loading' src='image/loading_more.gif' width=65 height=65>
         </div>
+        <footer id="footer"></footer>
     </div>
 </body>
 <script type="text/javascript" src="./script/api.js"></script>
@@ -43,9 +47,13 @@
         var sType = api.systemType;
 
         var header = $api.byId('head');
+        var footer = $api.byId('footer');
         // 适配iOS 7+，Android 4.4+状态栏
         $api.fixStatusBar(header);
+        $api.fixTabBar(footer);
         var headerH = $api.offset(header).h;
+        var footerH = $api.offset(footer).h;
+        console.log(footerH, headerH)
         api.setPrefs({
             key: 'headerH',
             value: headerH
@@ -69,7 +77,8 @@
             rect: {
                 w: 'auto',
                 h: 'auto',
-                marginTop: headerH
+                marginTop: headerH,
+                marginBottom: footerH
             },
             allowEdit: false,
             progress: {
@@ -80,7 +89,7 @@
             }
         });
 
-        var perms = ['storage', 'camera', 'photos', 'notification'];
+        var perms = ['storage', 'notification'];
         var sType = api.systemType;
         if (sType == "android") {
             if (!confirmPer(perms)) {
