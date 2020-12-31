@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport"
-        content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>钓友汇</title>
-    <link rel="stylesheet" type="text/css" href="./css/api.css" />
-    <link rel="stylesheet" type="text/css" href="./css/common.css" />
+    <link rel="stylesheet" type="text/css" href="./css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/common.css"/>
     <style type="text/css">
         .center {
             display: -webkit-box;
@@ -25,14 +25,14 @@
 </head>
 
 <body>
-    <div id="wrap">
-        <header id="head">
-        </header>
-        <div id="main" class='center'>
-            <img id='loading' src='image/loading_more.gif' width=65 height=65>
-        </div>
-        <footer id="footer"></footer>
+<div id="wrap">
+    <header id="head">
+    </header>
+    <div id="main" class='center'>
+        <img id='loading' src='image/loading_more.gif' width=65 height=65>
     </div>
+    <footer id="footer"></footer>
+</div>
 </body>
 <script type="text/javascript" src="./script/api.js"></script>
 <script type="text/javascript">
@@ -81,7 +81,7 @@
         });
 
         // 绑定用户别名为极光id。服务端可以指定别名进行消息推送
-        var param = { alias: aliasId };
+        var param = {alias: aliasId};
         ajpush.bindAliasAndTags(param, function (ret) {
             var statusCode = ret.statusCode;
             console.log("注册信息:" + JSON.stringify(ret));
