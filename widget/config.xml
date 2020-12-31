@@ -66,4 +66,9 @@
         <param name="urlScheme" value="AliPayPlusA6005577094467"/>
     </feature>
 
+    <feature name="ajpush">
+        <param name="app_key" value="0cc4196999b994ee664ca9bd"/>
+        <param name="channel" value="6RW2V0VTC4PMS512"/>
+    </feature>
+
 </widget>
