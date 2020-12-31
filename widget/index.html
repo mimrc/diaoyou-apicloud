@@ -70,7 +70,7 @@
             aliasId = "n_" + deviceId;
         } else {
             mainUrl = url + '?CLIENTID=i_' + deviceId + '&device=iphone';
-            aliasId = "n_" + deviceId;
+            aliasId = "i_" + deviceId;
         }
         console.log(aliasId);
 
@@ -80,8 +80,8 @@
             }
         });
 
-        var param = { alias: aliasId };
         // 绑定用户别名为极光id。服务端可以指定别名进行消息推送
+        var param = { alias: aliasId };
         ajpush.bindAliasAndTags(param, function (ret) {
             var statusCode = ret.statusCode;
             console.log("注册信息:" + JSON.stringify(ret));
