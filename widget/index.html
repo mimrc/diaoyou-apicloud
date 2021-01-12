@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport"
-        content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>钓友汇</title>
-    <link rel="stylesheet" type="text/css" href="./css/api.css" />
-    <link rel="stylesheet" type="text/css" href="./css/common.css" />
+    <link rel="stylesheet" type="text/css" href="./css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/common.css"/>
     <style type="text/css">
         .center {
             display: -webkit-box;
@@ -17,6 +17,7 @@
             -webkit-box-align: center;
             display: none;
         }
+
         #footer {
             height: 0;
         }
@@ -24,14 +25,14 @@
 </head>
 
 <body>
-    <div id="wrap">
-        <header id="head">
-        </header>
-        <div id="main" class='center'>
-            <img id='loading' src='image/loading_more.gif' width=65 height=65>
-        </div>
-        <footer id="footer"></footer>
+<div id="wrap">
+    <header id="head">
+    </header>
+    <div id="main" class='center'>
+        <img id='loading' src='image/loading_more.gif' width=65 height=65>
     </div>
+    <footer id="footer"></footer>
+</div>
 </body>
 <script type="text/javascript" src="./script/api.js"></script>
 <script type="text/javascript">
@@ -39,12 +40,13 @@
     var loadingRemoved = false;
     var url = "https://www.diaoyou.site";
     var mainUrl;
-    var clientParameter;
     var registrationId;
+    var ajpush = null;
 
     apiready = function () {
         var deviceId = api.deviceId;
         var sType = api.systemType;
+        ajpush = api.require('ajpush');
 
         var header = $api.byId('head');
         var footer = $api.byId('footer');
@@ -62,13 +64,39 @@
         deviceId = deviceId.replace(/-/g, "");
         deviceId = deviceId.replace(/:/g, "");
 
+        var aliasId;
         if (sType == "android") {
             mainUrl = url + '?CLIENTID=n_' + deviceId + '&device=android';
-            clientParameter = '&CLIENTID=n_' + deviceId + '&device=android&registrationId=' + registrationId;
+            aliasId = "n_" + deviceId;
         } else {
             mainUrl = url + '?CLIENTID=i_' + deviceId + '&device=iphone';
-            clientParameter = '&CLIENTID=i_' + deviceId + '&device=iphone&registrationId=' + registrationId;
+            aliasId = "i_" + deviceId;
         }
+        console.log(aliasId);
+
+        ajpush.init(function (ret) {
+            if (ret && ret.status) {
+                console.log("极光推送注册成功");
+            }
+        });
+
+        // 绑定用户别名为极光id。服务端可以指定别名进行消息推送
+        var param = {alias: aliasId};
+        ajpush.bindAliasAndTags(param, function (ret) {
+            var statusCode = ret.statusCode;
+            console.log("注册信息:" + JSON.stringify(ret));
+        });
+
+        ajpush.getRegistrationId(function (ret, err) {
+            if (ret.id) {
+                registrationId = ret.id;
+                console.log("=registrationId==" + ret.id + "==aliasId==" + aliasId);
+                api.setPrefs({
+                    key: 'registrationId',
+                    value: ret.id
+                });
+            }
+        });
 
         api.openFrame({
             name: 'main',
@@ -115,7 +143,7 @@
             });
         });
         removeLogic();
-    };
+    }
 
     function onBrowserStateChange(ret) {
         if (0 == ret.state) {//开始加载
