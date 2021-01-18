@@ -62,6 +62,8 @@
 
     <preference name="userAgent" value="/apicloud/i" />
 
+    <preference name="useWKWebView" value="true" />
+
     <feature name="aliPayPlus">
         <param name="urlScheme" value="AliPayPlusA6005577094467"/>
     </feature>
